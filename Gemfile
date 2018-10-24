@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'puma', '~> 3.9'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 3.2.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.7'
+gem 'puma'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'turbolinks'
+gem 'jbuilder'
 
 #Gems added by dev team
 gem 'immutable-struct'
-gem 'pg', '~> 0.18'
+gem 'pg'
 gem 'scenic'
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bootsnap'
+gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'cocoon'
-gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: :mri
