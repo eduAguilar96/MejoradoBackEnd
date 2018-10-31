@@ -5,11 +5,14 @@ class AnswersController < ApplicationController
   # GET /answers.json
   def index
     @answers = Answer.all
+    render json: @answers
   end
 
   # GET /answers/1
   # GET /answers/1.json
   def show
+    @answer = Answer.find(params[:id])
+    render json: @answer
   end
 
   # GET /answers/new

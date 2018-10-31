@@ -5,11 +5,14 @@ class SubjectsController < ApplicationController
   # GET /subjects.json
   def index
     @subjects = Subject.all
+    render json: @subjects
   end
 
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @subject = Subject.find(params[:id])
+    render json: @subject
   end
 
   # GET /subjects/new
@@ -24,7 +27,7 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
-    @subject = Subject.new(subject_params)
+    @subject = Subject.new(create_params)
 
     respond_to do |format|
       if @subject.save
@@ -68,7 +71,9 @@ class SubjectsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def subject_params
-      params.fetch(:subject, {})
+    def create_params
+      params.require(:subject).permit(
+        :text
+      )
     end
 end

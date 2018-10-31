@@ -5,11 +5,14 @@ class TextFieldsController < ApplicationController
   # GET /text_fields.json
   def index
     @text_fields = TextField.all
+    render json: @text_fields
   end
 
   # GET /text_fields/1
   # GET /text_fields/1.json
   def show
+    @text_field = TextField.find(params[:id])
+    render json: @text_field
   end
 
   # GET /text_fields/new

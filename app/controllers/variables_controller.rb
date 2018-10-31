@@ -5,11 +5,14 @@ class VariablesController < ApplicationController
   # GET /variables.json
   def index
     @variables = Variable.all
+    render json: @variables
   end
 
   # GET /variables/1
   # GET /variables/1.json
   def show
+    @variable = Variable.find(params[:id])
+    render json: @variable
   end
 
   # GET /variables/new
