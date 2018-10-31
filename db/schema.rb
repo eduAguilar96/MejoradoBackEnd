@@ -16,15 +16,24 @@ ActiveRecord::Schema.define(version: 2018_10_24_170445) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "answers", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "answers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "question_id"
     t.boolean "correct"
-    t.integer "type"
+    t.integer "tipo"
     t.string "text"
     t.string "equation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "answers_variables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "variable_id"
+    t.uuid "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answers_variables_on_answer_id"
+    t.index ["variable_id"], name: "index_answers_variables_on_variable_id"
   end
 
   create_table "exams", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -37,23 +46,23 @@ ActiveRecord::Schema.define(version: 2018_10_24_170445) do
     t.index ["subject_id"], name: "index_exams_on_subject_id"
   end
 
+  create_table "exams_questions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "question_id"
+    t.uuid "exam_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_exams_questions_on_exam_id"
+    t.index ["question_id"], name: "index_exams_questions_on_question_id"
+  end
+
   create_table "questions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "subject_id"
-    t.integer "type"
+    t.integer "tipo"
     t.string "name"
     t.string "text"
     t.string "equation"
     t.boolean "random_order", default: true
     t.index ["subject_id"], name: "index_questions_on_subject_id"
-  end
-
-  create_table "questions_exams", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "question_id"
-    t.uuid "exam_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["exam_id"], name: "index_questions_exams_on_exam_id"
-    t.index ["question_id"], name: "index_questions_exams_on_question_id"
   end
 
   create_table "subjects", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -73,7 +82,7 @@ ActiveRecord::Schema.define(version: 2018_10_24_170445) do
 
   create_table "variables", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "question_id"
-    t.integer "type"
+    t.integer "tipo"
     t.integer "low_num"
     t.integer "high_num"
     t.integer "low_den", default: 1
@@ -81,15 +90,6 @@ ActiveRecord::Schema.define(version: 2018_10_24_170445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_variables_on_question_id"
-  end
-
-  create_table "variables_answers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid "variable_id"
-    t.uuid "answer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_variables_answers_on_answer_id"
-    t.index ["variable_id"], name: "index_variables_answers_on_variable_id"
   end
 
 end

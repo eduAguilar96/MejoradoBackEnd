@@ -10,7 +10,7 @@ class SubjectChilds < ActiveRecord::Migration[5.2]
 
     create_table :questions, id: :uuid, default: "uuid_generate_v4()" do |t|
       t.belongs_to :subject, type: :uuid
-      t.integer :type
+      t.integer :tipo
       t.string :name
       t.string :text
       t.string :equation
