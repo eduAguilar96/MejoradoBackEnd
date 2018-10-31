@@ -16,6 +16,7 @@ gem 'bootsnap'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'cocoon'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: :mri
