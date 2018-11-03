@@ -37,4 +37,5 @@ class ExamsController < ApplicationController
         :institution,
         :professor
       )
+    end
 end
