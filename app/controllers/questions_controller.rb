@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    json_response(@question)
+    render :json => @question, :include => [:variables, :answers]
   end
 
   def update
@@ -26,18 +26,32 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def set_question
-      @question = Question.find(params[:id])
-    end
 
-    def question_params
-      params.require(:question).permit(
-        :subject_id,
+  def set_question
+    @question = Question.find(params[:id])
+  end
+
+  def question_params
+    params.require(:question).permit(
+      :subject_id,
+      :tipo,
+      :name,
+      :text,
+      :equation,
+      :random_order,
+      variables_attributes: [
         :tipo,
-        :name,
+        :low_num,
+        :high_num,
+        :low_den,
+        :high_den,
+      ],
+      answers_attributes: [
+        :correct,
+        :tipo,
         :text,
-        :equation,
-        :random_order
-      )
-    end
+        :equation
+      ]
+    )
+  end
 end
