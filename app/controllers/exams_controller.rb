@@ -12,7 +12,7 @@ class ExamsController < ApplicationController
   end
 
   def show
-    json_response(@exam)
+    render :json => @exam, :include => [:text_fields]
   end
 
   def update
@@ -35,7 +35,11 @@ class ExamsController < ApplicationController
         :subject_id,
         :name,
         :institution,
-        :professor
+        :professor,
+        text_fields_attributes:[
+          :key,
+          :body
+        ]
       )
     end
 end
