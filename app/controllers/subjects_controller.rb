@@ -12,7 +12,7 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    json_response(@subject)
+    render :json => @subject, :include => [:questions]
   end
 
   def update
