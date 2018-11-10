@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
         :high_num,
         :low_den,
         :high_den,
+        :name
       ],
       answers_attributes: [
         :correct,

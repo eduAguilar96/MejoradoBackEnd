@@ -36,7 +36,8 @@ class VariablesController < ApplicationController
         :low_num,
         :high_num,
         :low_den,
-        :high_den
+        :high_den,
+        :name
       )
     end
 end
