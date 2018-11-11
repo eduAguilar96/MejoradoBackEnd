@@ -17,6 +17,7 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'cocoon'
 gem 'rack-cors'
+gem 'dentaku'
 
 group :development, :test do
   gem 'byebug', platforms: :mri

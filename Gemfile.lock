@@ -63,6 +63,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    dentaku (3.2.1)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -188,6 +189,7 @@ DEPENDENCIES
   byebug
   cocoon
   coffee-rails
+  dentaku
   immutable-struct
   jbuilder
   jquery-rails
@@ -209,4 +211,4 @@ RUBY VERSION
    ruby 2.4.5p335
 
 BUNDLED WITH
-   1.16.6
+   1.17.1

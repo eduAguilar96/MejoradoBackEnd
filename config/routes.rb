@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :subjects, only: [:index, :show, :create, :update, :destoy]
   resources :text_fields, only: [:index, :show, :create, :update, :destoy]
   resources :variables, only: [:index, :show, :create, :update, :destoy]
+
+  get '/exams/:id/gen', to: 'exams#generate'
 end
