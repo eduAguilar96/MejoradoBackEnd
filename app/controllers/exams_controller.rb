@@ -30,15 +30,7 @@ class ExamsController < ApplicationController
   end
 
   def generate
-    render :json =>
-    {
-      subject: @exam.subject.text,
-      name: @exam.name,
-      institution: @exam.institution,
-      professor: @exam.professor,
-      text_fields: @exam.text_fields,
-      questions: gen_questions
-    }
+    render :json => gen_exams
   end
 
   private
@@ -51,15 +43,23 @@ class ExamsController < ApplicationController
     @variables = gen_variables(question.variables)
   end
 
+  def gen_exams
+    exams = []
+    params[:times].to_i.times do |index|
+      exams << {
+        id: index,
+        subject: @exam.subject.text,
+        name: @exam.name,
+        institution: @exam.institution,
+        professor: @exam.professor,
+        text_fields: @exam.text_fields,
+        questions: gen_questions
+      }
+    end
+    exams
+  end
+
   def gen_variables(variables)
-    # vars = []
-    # variables.each do |v|
-    #   vars << {
-    #     v.name => rand(
-    #       (v.low_num.to_i/v.low_den.to_i)..(v.high_num.to_i/v.high_den.to_i))
-    #   }
-    # end
-    # vars
     vars = Hash.new(0)
     variables.each do |v|
       vars[v.name] = rand(
@@ -77,8 +77,7 @@ class ExamsController < ApplicationController
         text: q.text,
         tipo: q.tipo,
         equation: parse_equation(q.equation),
-        answers: gen_answers(q),
-        variables: @variables
+        answers: gen_answers(q)
       }
     end
     questions

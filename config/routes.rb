@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :text_fields, only: [:index, :show, :create, :update, :destoy]
   resources :variables, only: [:index, :show, :create, :update, :destoy]
 
-  get '/exams/:id/gen', to: 'exams#generate'
+  get '/exams/:id/gen/:times', to: 'exams#generate'
 end
