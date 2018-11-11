@@ -17,6 +17,7 @@ class ExamsController < ApplicationController
 
   def update
     @exam.update(exam_params)
+    @exam.questions.clear unless @exam.questions.empty?
     params[:questions].each do |q|
       @exam.questions << Question.find(q[:id])
     end
