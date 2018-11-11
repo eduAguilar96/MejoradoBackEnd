@@ -12,7 +12,7 @@ class ExamsController < ApplicationController
   end
 
   def show
-    render :json => @exam, :include => [:text_fields]
+    render :json => @exam, :include => [:text_fields, :questions]
   end
 
   def update
