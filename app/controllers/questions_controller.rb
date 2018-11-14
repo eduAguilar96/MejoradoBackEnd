@@ -17,6 +17,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @question.answers.each do |child|
+      child.mark_for_destruction
+    end
+    @question.variables.each do |child|
+      child.mark_for_destruction
+    end
     @question.update(question_params)
     head :no_content
   end
