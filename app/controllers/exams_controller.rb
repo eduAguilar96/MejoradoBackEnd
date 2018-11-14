@@ -97,16 +97,18 @@ class ExamsController < ApplicationController
   end
 
   def parse_equation(e)
-    @variables.each do |key, value|
-      e = e.gsub(key, value.to_s)
-    end
+    unless e.blank?
+      @variables.each do |key, value|
+        e = e.gsub(key, value.to_s)
+      end
 
-    while e.include?("{")
-      replace = e[/\{.*?\}/]
-      op = replace.gsub(/[{}]/, "")
-      calculator = Dentaku::Calculator.new
-      op = calculator.evaluate(op).to_s
-      e = e.gsub(replace, op)
+      while e.include?("{")
+        replace = e[/\{.*?\}/]
+        op = replace.gsub(/[{}]/, "")
+        calculator = Dentaku::Calculator.new
+        op = calculator.evaluate(op).to_s
+        e = e.gsub(replace, op)
+      end
     end
     e
   end
