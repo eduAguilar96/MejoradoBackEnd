@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
-    json_response(@questions)
+    # json_response(@questions)
+    render :json => @questions, :include => [:variables, :answers]
   end
 
   def create
