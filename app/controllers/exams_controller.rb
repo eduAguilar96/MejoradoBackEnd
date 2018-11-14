@@ -70,7 +70,7 @@ class ExamsController < ApplicationController
 
   def gen_questions
     questions = []
-    @exam.questions.each do |q|
+    @exam.questions.shuffle.each do |q|
       set_variables(q)
       questions << {
         name: q.name,
@@ -85,7 +85,7 @@ class ExamsController < ApplicationController
 
   def gen_answers(q)
     answers = []
-    q.answers.each do |ans|
+    q.answers.shuffle.each do |ans|
       answers << {
         correct: ans.correct,
         tipo: ans.tipo,
